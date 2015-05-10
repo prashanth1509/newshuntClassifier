@@ -18,7 +18,7 @@ def index(request):
 	mostProbableSubject = max(set(subjects), key=subjects.count)
 
 	response = {}
-	response["isNews"] = True
+	response["isNews"] = "yes"
 	response["topic"] = mostProbableSubject
 	response["label"] = label
 	
