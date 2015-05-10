@@ -11,13 +11,16 @@ def index(request):
 	cl = Classifyar("https://api.myjson.com/bins/1s1xp")
 	cl = cl.getClassifier()
 
-	subjects = []
-	for line in texts:
-		subjects.append(cl.classify(line))
-	
-	if len(subjects)>0:
-		mostProbableSubject = max(set(subjects), key=subjects.count)
-	else:
+	try:
+		subjects = []
+		for line in texts:
+			subjects.append(cl.classify(line))
+		
+		if len(subjects)>0:
+			mostProbableSubject = max(set(subjects), key=subjects.count)
+		else:
+			mostProbableSubject = "EMPTY"
+	except:
 		mostProbableSubject = "EMPTY"
 
 	response = {}
