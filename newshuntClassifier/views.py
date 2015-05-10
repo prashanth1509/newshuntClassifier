@@ -15,11 +15,14 @@ def index(request):
 	for line in texts:
 		subjects.append(cl.classify(line))
 	
-	mostProbableSubject = max(set(subjects), key=subjects.count)
+	if len(subjects)>0:
+		mostProbableSubject = max(set(subjects), key=subjects.count)
+	else:
+		mostProbableSubject = "EMPTY"
 
 	response = {}
 	response["isNews"] = "yes"
 	response["topic"] = mostProbableSubject
 	response["label"] = label
 	
-	return HttpResponse(json.dumps(response))
+	return HttpResponse(json.dumps(response), content_type="application/json")
